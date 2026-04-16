@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Licensing Comparison — Claude, Claude Code, Cursor</title>
+<title>AI Licensing Comparison — Claude, Claude Code, Cursor, Google AI Studio</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1a1a1a; background: #f5f5f3; line-height: 1.6; }
@@ -93,7 +93,8 @@
 
   <!-- Header -->
   <div class="header">
-    <h1>AI Licensing Comparison: Claude &bull; Claude Code &bull; Cursor</h1>
+    <h1>AI Licensing Comparison</h1>
+    <p>Claude &bull; Claude Code &bull; Cursor &bull; Google AI Studio / Gemini</p>
     <p>Prepared for IT Procurement — University Deployment Evaluation</p>
     <div class="meta">
       <span>Generated April 2026</span>
@@ -106,6 +107,10 @@
   <div class="summary">
     <h2>Key Findings for IT Procurement</h2>
     <div class="findings">
+      <div class="finding blue">
+        <h3>Google: strongest FERPA story + Workspace bundle value</h3>
+        <p>Google is the only vendor with explicit FERPA support (plus COPPA, FedRAMP High, ISO 27001, SOC 2). If your university already uses Google Workspace, Gemini AI is now <strong>bundled into paid plans</strong> at no extra cost. The Education plan extends this campus-wide at discounted rates. The AI Studio interface is completely free for prototyping.</p>
+      </div>
       <div class="finding">
         <h3>Top recommendation for campus-wide deployment</h3>
         <p>Claude's <strong>Education Plan</strong> is the only product with an explicit university-wide offering covering students, faculty, and staff at institutional rates. Contact Anthropic sales directly — this plan is not available through individual signups.</p>
@@ -138,6 +143,7 @@
     <button class="tab active" onclick="show('claude', this)">Claude (claude.ai)</button>
     <button class="tab" onclick="show('claudecode', this)">Claude Code</button>
     <button class="tab" onclick="show('cursor', this)">Cursor</button>
+    <button class="tab" onclick="show('google', this)">Google AI / Gemini</button>
     <button class="tab" onclick="show('compliance', this)">Compliance &amp; Security</button>
     <button class="tab" onclick="show('edu', this)">University / Education</button>
   </div>
@@ -351,6 +357,181 @@
     <div class="note"><strong>Credit system explained:</strong> Auto mode is unlimited — Cursor selects cost-efficient models automatically. Manually selecting frontier models (Claude Sonnet, GPT-4) draws from your credit pool. When credits are exhausted, enable pay-as-you-go overages or switch to Auto. Annual billing saves ~20%. Cursor also supports BYOK (Bring Your Own API Key) for OpenAI or Anthropic, bypassing the credit system entirely.</div>
   </div>
 
+  <!-- GOOGLE AI STUDIO / GEMINI -->
+  <div id="google" class="section" data-title="Google AI Studio and Gemini">
+    <div class="sec-head">
+      <h2>Google AI Studio &amp; Gemini</h2>
+      <p>Three distinct tiers: AI Studio (free prototyping tool), Consumer subscriptions (AI Plus/Pro/Ultra), and Workspace/Enterprise (team &amp; org plans) &bull; <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank">ai.google.dev/pricing</a> &bull; <a href="https://one.google.com/about/google-ai-plans/" target="_blank">Google AI plans</a> &bull; <a href="https://workspace.google.com/pricing" target="_blank">Workspace pricing</a></p>
+    </div>
+
+    <p class="sub-label">Individual / Consumer plans</p>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Plan</th><th>Price</th><th>Usage / limits</th><th>Models</th><th>Key features</th><th>Storage</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-gray">Free (Gemini app)</span></td>
+            <td>$0</td>
+            <td>~100 AI credits/mo; daily limits; rate-limited</td>
+            <td>Gemini 2.5 Flash (Auto)</td>
+            <td>Gemini app (web, iOS, Android); web search; basic Workspace integration; 15GB storage</td>
+            <td>15GB</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">AI Plus</span></td>
+            <td>$8/mo</td>
+            <td>More credits than Free; limited limits</td>
+            <td>Gemini 3 Pro (limited)</td>
+            <td>Gemini 3 Pro access; Deep Research; Nano Banana Pro image gen; Flow (AI filmmaking); Whisk; NotebookLM</td>
+            <td>200GB</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">AI Pro</span></td>
+            <td>$19.99/mo<span class="pn">~$99.99/yr promotional for new users</span></td>
+            <td>300 Thinking prompts/day; 100 Pro prompts/day; "Higher" limits; 1M token context</td>
+            <td>Gemini 3.1 Pro; all models</td>
+            <td>Everything in Plus + Gemini in Gmail/Docs/Sheets/Meet; Jules (AI coding agent); Deep Search; Gemini Code Assist; NotebookLM Plus; Flow + Whisk higher limits; Google Home Premium Standard; 12 mo free for university students</td>
+            <td>2TB</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-purple">AI Ultra</span></td>
+            <td>$249.99/mo<span class="pn">50% off first 3 months for new users</span></td>
+            <td>"Highest" limits across all products; 25,000 AI credits/mo; 1M token context</td>
+            <td>Gemini 3.1 Pro; all models; max priority</td>
+            <td>Everything in Pro + Project Mariner (10 parallel agentic browser tasks); Veo 3.1 video generation (1080p + audio); highest Jules/Code Assist limits; $100/mo Google Cloud credits; YouTube Premium; Google Home Premium Advanced; Project Genie (early access)</td>
+            <td>30TB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Usage limits can change based on capacity and regional availability. "Thinking tokens" (internal reasoning) are billed separately from visible output tokens on the API — relevant for developers. The AI Pro free year for university students applies in the US, UK, Japan, Brazil, and Indonesia.</div>
+
+    <p class="sub-label">Google AI Studio (Developer / API)</p>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Tier</th><th>Price</th><th>Usage / rate limits</th><th>Data training</th><th>Key features</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-gray">AI Studio interface</span></td>
+            <td>$0 — always free</td>
+            <td>Rate-limited; lower RPM than paid API</td>
+            <td>Free tier data <strong>may be used</strong> by Google for model improvement</td>
+            <td>Browser-based prompt IDE; prompt testing; model fine-tuning; API key generation; multimodal inputs (text, image, audio, video). No subscription, no seat fees.</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Gemini API — Free tier</span></td>
+            <td>$0 (via AI Studio)</td>
+            <td>1,500 req/day on Flash models; lower RPM; no SLA</td>
+            <td>Data <strong>may be used</strong> for training</td>
+            <td>Free access to Flash-Lite, 2.5 Flash, 3 Flash models; good for prototyping and low-volume apps</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">Gemini API — Paid tier</span></td>
+            <td>Pay-as-you-go (per token)<span class="pn">Prepay or Postpay billing (from Mar 2026)</span></td>
+            <td>Higher RPM; production SLA; no data training</td>
+            <td><strong>Not used</strong> for training on paid tier</td>
+            <td>Full model access; context caching (up to 90% savings); 50% batch discount; Google Search grounding; multimodal inputs; 2M token context on some models</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">Vertex AI (Enterprise)</span></td>
+            <td>Custom / GCP pricing<span class="pn">Regional endpoints available</span></td>
+            <td>Enterprise SLAs; provisioned throughput available</td>
+            <td>Not used for training</td>
+            <td>Private VPC deployment; data residency in specific GCP regions; enterprise support; compliance tooling; model versioning; integration with Google Cloud services</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="sub-label">API token pricing (paid tier) — key models</p>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Model</th><th>Input (per MTok)</th><th>Output (per MTok)</th><th>Context window</th><th>Notes</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-gray">Gemini 2.5 Flash-Lite</span></td>
+            <td>$0.10</td><td>$0.40</td>
+            <td>1M tokens</td>
+            <td>Cheapest stable option; flat pricing regardless of context length; batch: $0.05/$0.20</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-gray">Gemini 2.5 Flash</span></td>
+            <td>$0.30</td><td>$2.50</td>
+            <td>1M tokens</td>
+            <td>Best balance of cost and capability; flat pricing; batch: $0.15/$1.25</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Gemini 2.5 Pro</span></td>
+            <td>$1.25 (&le;200K)<br>$2.50 (&gt;200K)</td>
+            <td>$10.00 (&le;200K)<br>$15.00 (&gt;200K)</td>
+            <td>1M tokens</td>
+            <td>Best for coding/reasoning; cost doubles above 200K context — applies to whole prompt, not just overage; batch: $0.625/$5</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Gemini 3.1 Flash-Lite (preview)</span></td>
+            <td>$0.25</td><td>$1.50</td>
+            <td>1M tokens</td>
+            <td>Cheapest Gemini 3 option; preview = may change; flat pricing</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-purple">Gemini 3.1 Pro (preview)</span></td>
+            <td>$2.00 (&le;200K)<br>$4.00 (&gt;200K)</td>
+            <td>$12.00 (&le;200K)<br>$18.00 (&gt;200K)</td>
+            <td>1M tokens</td>
+            <td>Most capable current model; preview pricing; 200K threshold applies to whole prompt; batch: $1.00/$6.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>Key cost gotchas:</strong> (1) The 200K token threshold on Pro models applies to the <em>entire</em> prompt — cross it by one token and the higher rate applies to everything. (2) Thinking/reasoning tokens are billed as output tokens even when not shown. (3) Google Search grounding costs extra: $14/1K queries (Gemini 3 models) or $35/1K prompts (Gemini 2.5). (4) Context caching can save up to 90% for repeated large prompts. (5) Gemini 2.0 Flash models are deprecated — shut down June 1, 2026.</div>
+
+    <p class="sub-label">Google Workspace with Gemini (Team / Org plans)</p>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Plan</th><th>Price</th><th>Gemini AI features</th><th>Key features</th><th>Max users</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-gray">Business Starter</span></td>
+            <td>$7/user/mo annual<span class="pn">$8.40 monthly</span></td>
+            <td>Basic Gemini features in Workspace apps</td>
+            <td>Gmail, Drive, Meet, Docs, Sheets, Slides; 30GB pooled storage; Gemini in apps (limited)</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Business Standard</span></td>
+            <td>$14/user/mo annual<span class="pn">$16.80 monthly</span></td>
+            <td>Full Gemini in Gmail, Docs, Sheets, Meet, Drive; AI writing, summaries, analysis</td>
+            <td>2TB pooled storage; Meet recording; noise cancellation; 150-person meetings; Workspace Studio (no-code AI agents)</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Business Plus</span></td>
+            <td>$22/user/mo annual<span class="pn">$26.40 monthly</span></td>
+            <td>Enhanced Gemini features; advanced security controls</td>
+            <td>5TB storage; 500-person meetings; Vault (eDiscovery); advanced MDM; enhanced phishing protection</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">Enterprise (Starter/Standard/Plus)</span></td>
+            <td>Custom — contact Google Sales<span class="pn">Annual; no user cap; 20-40% discounts negotiable</span></td>
+            <td>Highest Gemini limits; Gemini Enterprise features; Workspace Studio advanced</td>
+            <td>Unlimited users; DLP; Vault; CMEK (customer-managed encryption keys); advanced admin; audit logs; SAML SSO; SCIM; context-aware access; data regions; eDiscovery; dedicated support</td>
+            <td>Unlimited</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>Important:</strong> The separate "Gemini Business" and "Gemini Enterprise" add-ons have been discontinued for new purchases. Gemini AI is now bundled directly into all Business Standard and above plans — there is no extra per-token charge for using Gemini within Workspace apps. For universities, a dedicated Google Workspace for Education plan exists (see the University tab).</div>
+  </div>
+
   <!-- COMPLIANCE -->
   <div id="compliance" class="section" data-title="Compliance and Security">
     <div class="sec-head">
@@ -360,29 +541,31 @@
     <div class="card">
       <table>
         <thead><tr>
-          <th>Feature</th><th>Claude Enterprise</th><th>Claude Code (Enterprise)</th><th>Cursor Teams / Enterprise</th>
+          <th>Feature</th><th>Claude Enterprise</th><th>Claude Code (Enterprise)</th><th>Cursor Teams / Enterprise</th><th>Google Workspace Enterprise / Vertex AI</th>
         </tr></thead>
         <tbody>
-          <tr><td>SSO</td><td><span class="chk">✓</span> SAML 2.0, OIDC (Okta, Azure AD, Google)</td><td><span class="chk">✓</span> Same as Claude Enterprise</td><td><span class="chk">✓</span> SAML/OIDC (Teams and above)</td></tr>
-          <tr><td>SCIM provisioning</td><td><span class="chk">✓</span> Auto sync with IdP; recommended for 20+ users</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Enterprise only</td></tr>
-          <tr><td>Audit logs</td><td><span class="chk">✓</span> Immutable; via Compliance API</td><td><span class="chk">✓</span> Centralized; org-level policies</td><td><span class="chk">✓</span> Enterprise only; AI code tracking APIs</td></tr>
-          <tr><td>SOC 2 Type II</td><td><span class="chk">✓</span> Full report under NDA via Trust Portal</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Teams and Enterprise</td></tr>
-          <tr><td>ISO 27001</td><td><span class="chk">✓</span> ISO 27001:2022 + ISO/IEC 42001:2023 (AI)</td><td><span class="chk">✓</span></td><td><span class="crs">—</span> Not publicly confirmed</td></tr>
-          <tr><td>HIPAA</td><td><span class="chk">✓</span> HIPAA-ready config; BAA available</td><td><span class="chk">✓</span> Requires ZDR addendum</td><td><span class="crs">—</span> Not offered</td></tr>
-          <tr><td>FERPA</td><td><span class="crs">—</span> Not certified; negotiate DPA for student data</td><td><span class="crs">—</span></td><td><span class="crs">—</span></td></tr>
-          <tr><td>Zero data retention (ZDR)</td><td><span class="chk">✓</span> Addendum available; no data written to disk</td><td><span class="chk">✓</span> Required for PHI</td><td><span class="crs">—</span></td></tr>
-          <tr><td>Model training on data</td><td><span class="chk">✓</span> Off by default (Enterprise &amp; API)</td><td><span class="chk">✓</span> Off by default</td><td><span class="chk">✓</span> Privacy mode (Teams+)</td></tr>
-          <tr><td>Data residency / private network</td><td><span class="chk">✓</span> AWS Bedrock or Google Vertex AI (VPC)</td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td></tr>
-          <tr><td>Custom data retention</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td></tr>
-          <tr><td>GDPR / DPA</td><td><span class="chk">✓</span> Data Processing Addendum available</td><td><span class="chk">✓</span></td><td><span class="crs">—</span> Not publicly confirmed</td></tr>
-          <tr><td>BYOK encryption</td><td><span class="chk">✓</span> Coming H1 2026</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> BYOK for OpenAI/Anthropic keys</td></tr>
-          <tr><td>IP allowlisting</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td></tr>
-          <tr><td>Role-based access control</td><td><span class="chk">✓</span> Primary owner, owner, member roles</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Teams and above</td></tr>
-          <tr><td>Invoice / PO billing</td><td><span class="chk">✓</span> Sales-assisted Enterprise</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Enterprise only</td></tr>
+          <tr><td>SSO</td><td><span class="chk">✓</span> SAML 2.0, OIDC (Okta, Azure AD, Google)</td><td><span class="chk">✓</span> Same as Claude Enterprise</td><td><span class="chk">✓</span> SAML/OIDC (Teams and above)</td><td><span class="chk">✓</span> SAML SSO; Google Identity; all Enterprise plans</td></tr>
+          <tr><td>SCIM provisioning</td><td><span class="chk">✓</span> Auto sync with IdP; recommended for 20+ users</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Enterprise only</td><td><span class="chk">✓</span> Enterprise plans</td></tr>
+          <tr><td>Audit logs</td><td><span class="chk">✓</span> Immutable; via Compliance API</td><td><span class="chk">✓</span> Centralized; org-level policies</td><td><span class="chk">✓</span> Enterprise only; AI code tracking APIs</td><td><span class="chk">✓</span> All Enterprise plans; Google Admin console</td></tr>
+          <tr><td>SOC 2 Type II</td><td><span class="chk">✓</span> Full report under NDA via Trust Portal</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Teams and Enterprise</td><td><span class="chk">✓</span> SOC 1/2/3 certified</td></tr>
+          <tr><td>ISO 27001</td><td><span class="chk">✓</span> ISO 27001:2022 + ISO/IEC 42001:2023 (AI)</td><td><span class="chk">✓</span></td><td><span class="crs">—</span> Not publicly confirmed</td><td><span class="chk">✓</span> ISO 27001, 27017, 27018, 27701, 42001 (AI)</td></tr>
+          <tr><td>HIPAA</td><td><span class="chk">✓</span> HIPAA-ready config; BAA available</td><td><span class="chk">✓</span> Requires ZDR addendum</td><td><span class="crs">—</span> Not offered</td><td><span class="chk">✓</span> HIPAA-compliant; BAA available on Workspace</td></tr>
+          <tr><td>FERPA</td><td><span class="crs">—</span> Not certified; negotiate DPA for student data</td><td><span class="crs">—</span></td><td><span class="crs">—</span></td><td><span class="chk">✓</span> Explicitly supported (Workspace for Education)</td></tr>
+          <tr><td>COPPA</td><td><span class="crs">—</span> Not stated</td><td><span class="crs">—</span></td><td><span class="crs">—</span></td><td><span class="chk">✓</span> Explicitly supported</td></tr>
+          <tr><td>FedRAMP</td><td><span class="crs">—</span> Not stated</td><td><span class="crs">—</span></td><td><span class="crs">—</span></td><td><span class="chk">✓</span> FedRAMP High authorized</td></tr>
+          <tr><td>Zero data retention (ZDR)</td><td><span class="chk">✓</span> Addendum available; no data written to disk</td><td><span class="chk">✓</span> Required for PHI</td><td><span class="crs">—</span></td><td><span class="chk">✓</span> Paid API/Workspace: data not used for training; Vertex AI: configurable</td></tr>
+          <tr><td>Model training on data</td><td><span class="chk">✓</span> Off by default (Enterprise &amp; API)</td><td><span class="chk">✓</span> Off by default</td><td><span class="chk">✓</span> Privacy mode (Teams+)</td><td><span class="chk">✓</span> Off on paid Workspace + paid API; <strong>on by default on free API tier</strong></td></tr>
+          <tr><td>Data residency / private network</td><td><span class="chk">✓</span> AWS Bedrock or Google Vertex AI (VPC)</td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td><td><span class="chk">✓</span> GCP regional endpoints via Vertex AI; CMEK on Enterprise</td></tr>
+          <tr><td>Custom data retention</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td><td><span class="chk">✓</span> Via Vault (Enterprise)</td></tr>
+          <tr><td>GDPR / DPA</td><td><span class="chk">✓</span> Data Processing Addendum available</td><td><span class="chk">✓</span></td><td><span class="crs">—</span> Not publicly confirmed</td><td><span class="chk">✓</span> GDPR compliant; DPA available</td></tr>
+          <tr><td>BYOK / CMEK encryption</td><td><span class="chk">✓</span> Coming H1 2026</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> BYOK for OpenAI/Anthropic keys</td><td><span class="chk">✓</span> CMEK on Workspace Enterprise + Vertex AI</td></tr>
+          <tr><td>IP allowlisting</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td><td><span class="chk">✓</span> Context-aware access (Enterprise)</td></tr>
+          <tr><td>Role-based access control</td><td><span class="chk">✓</span> Primary owner, owner, member roles</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Teams and above</td><td><span class="chk">✓</span> Full Google Admin console; per-user Gemini licensing</td></tr>
+          <tr><td>Invoice / PO billing</td><td><span class="chk">✓</span> Sales-assisted Enterprise</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Enterprise only</td><td><span class="chk">✓</span> Enterprise plans; GCP committed use</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note"><strong>FERPA note:</strong> None of these vendors offer FERPA certification as a checkbox. Universities must negotiate a Data Processing Agreement and contractually exclude student data. Claude's ZDR addendum + BAA is the strongest available framework for regulated data. For maximum isolation, deploy Claude via AWS Bedrock or Google Vertex AI, which routes all traffic within your VPC.</div>
+    <div class="note"><strong>Google is the compliance leader for universities</strong> — the only vendor with explicit FERPA + COPPA support and FedRAMP High authorization, making it strongest for regulated student data. Claude's ZDR + BAA is the best framework for HIPAA-regulated research data. Cursor has the thinnest compliance stack and is not appropriate for regulated workloads. <strong>Important for Google free API tier:</strong> data may be used for model training — always use the paid tier for any institutional or student data.</div>
   </div>
 
   <!-- EDUCATION -->
@@ -447,6 +630,55 @@
       3. Negotiate ZDR + BAA terms and ask explicitly about FERPA data handling during procurement.<br>
       4. For developer/IT staff needing a code editor, evaluate Cursor Teams separately — it does not overlap with Claude's general productivity use case.<br>
       5. All pricing verified April 2026 — confirm current rates before finalizing procurement.
+    </div>
+
+    <p class="sub-label">Google — Education plan</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Option</th><th>Who it's for</th><th>What you get</th><th>How to access</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-green">Google Workspace for Education Fundamentals</span></td>
+            <td>K-12 and higher ed institutions</td>
+            <td><strong>Free.</strong> Gmail, Drive, Docs, Meet, Classroom for all students/staff; basic Gemini AI features; FERPA + COPPA compliant; no ads; no data mining for advertising</td>
+            <td>Apply at workspace.google.com/education — requires domain verification and nonprofit/edu status</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-green">Workspace for Education Standard</span></td>
+            <td>Higher ed — enhanced security needs</td>
+            <td>Everything in Fundamentals + advanced security; audit logs; Vault; advanced DLP; enhanced admin controls; more Gemini features</td>
+            <td>Contact Google Education sales; pricing negotiated per institution</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-green">Workspace for Education Plus</span></td>
+            <td>Universities wanting full AI + compliance</td>
+            <td>Everything above + highest Gemini limits in Workspace apps; Gemini for Classroom; Workspace Studio; advanced analytics; premium support; FERPA, HIPAA, COPPA compliant</td>
+            <td>Contact Google Education sales; pricing negotiated per institution</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">AI Pro — Student free year</span></td>
+            <td>Individual enrolled students</td>
+            <td>Full AI Pro features free for 12 months: Gemini 3.1 Pro, Deep Research, Gemini in Workspace apps, Jules coding agent, NotebookLM Plus, 2TB storage</td>
+            <td>Available in US, UK, Japan, Brazil, Indonesia via google.com/edu — verify with .edu email. No institutional contract needed.</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-gray">Gemini API — Research (free tier)</span></td>
+            <td>Faculty/student researchers building apps</td>
+            <td>Free API access with rate limits; access to Flash models; good for prototyping and research projects. <strong>Note: free tier data may be used for training — use paid tier for sensitive research data.</strong></td>
+            <td>ai.google.dev — Google account required; no institutional contract</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <strong>Google's key advantage for universities:</strong> Google Workspace for Education Fundamentals is <strong>free</strong> for qualifying institutions and explicitly supports FERPA and COPPA — making it the most straightforward compliance path for student data. If your university already uses Google Workspace, Gemini AI features are bundled into paid tiers at no additional per-user AI cost. The AI Pro free year for students is a significant perk — available without any institutional contract in supported countries.<br><br>
+      <strong>Updated recommended IT action steps (all vendors):</strong><br>
+      1. If your university uses Google Workspace: confirm your current Workspace tier includes Gemini, and request an upgrade quote for Education Plus if needed.<br>
+      2. Contact Anthropic education sales (claude.com/solutions/education) for a Claude for Education institutional quote — best for research-heavy or general productivity use cases.<br>
+      3. For regulated student data: Google's FERPA certification is the strongest out-of-the-box. For HIPAA-regulated research, Claude's ZDR + BAA is the strongest framework.<br>
+      4. Negotiate a Data Processing Agreement (DPA) with every vendor before deployment.<br>
+      5. For developer/IT staff needing an AI code editor: evaluate Cursor Teams separately.<br>
+      6. <strong>Never use the Google AI Studio free API tier for institutional or student data</strong> — data may be used for model training. Always use the paid tier or Workspace Education plans.
     </div>
   </div>
 

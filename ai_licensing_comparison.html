@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Licensing Comparison — Claude, Claude Code, Cursor</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1a1a1a; background: #f5f5f3; line-height: 1.6; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* Header */
+  .header { margin-bottom: 2rem; }
+  .header h1 { font-size: 24px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+  .header p { font-size: 13px; color: #666; }
+  .header .meta { display: flex; gap: 16px; margin-top: 8px; font-size: 12px; color: #888; }
+
+  /* Summary box */
+  .summary { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; padding: 1.5rem 1.75rem; margin-bottom: 2rem; }
+  .summary h2 { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 1px solid #f0f0ec; }
+  .findings { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .finding { background: #f9f9f7; border-radius: 8px; padding: 12px 14px; border-left: 3px solid #1D9E75; }
+  .finding.amber { border-left-color: #BA7517; }
+  .finding.blue { border-left-color: #185FA5; }
+  .finding.purple { border-left-color: #534AB7; }
+  .finding.red { border-left-color: #A32D2D; }
+  .finding h3 { font-size: 12px; font-weight: 600; color: #444; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+  .finding p { font-size: 13px; color: #333; line-height: 1.5; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .tab { padding: 7px 16px; border: 1px solid #d0d0ca; border-radius: 8px; font-size: 13px; background: #fff; color: #555; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+  .tab:hover { background: #f5f5f3; border-color: #bbb; }
+  .tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; font-weight: 500; }
+
+  /* Sections */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Section header */
+  .sec-head { margin-bottom: 1rem; }
+  .sec-head h2 { font-size: 17px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+  .sec-head p { font-size: 12px; color: #888; }
+  .sec-head a { color: #185FA5; text-decoration: none; }
+  .sec-head a:hover { text-decoration: underline; }
+
+  /* Card wrapper */
+  .card { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; overflow-x: auto; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  th { background: #f5f5f3; font-weight: 500; text-align: left; padding: 9px 11px; border-bottom: 1px solid #e5e5e0; color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  td { padding: 9px 11px; border-bottom: 1px solid #f0f0ec; vertical-align: top; line-height: 1.45; color: #1a1a1a; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafaf8; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; white-space: nowrap; }
+  .b-gray { background: #f0ede6; color: #444; }
+  .b-blue { background: #ddeeff; color: #0c447c; }
+  .b-teal { background: #d8f4ec; color: #085041; }
+  .b-amber { background: #faeedd; color: #633806; }
+  .b-purple { background: #eeedfe; color: #3c3489; }
+  .b-green { background: #e8f3da; color: #27500a; }
+
+  /* Note box */
+  .note { background: #f9f9f7; border-left: 3px solid #d0d0ca; padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 12px; color: #555; margin-top: 1rem; line-height: 1.6; }
+  .note strong { color: #333; }
+
+  /* Check/cross */
+  .chk { color: #1D9E75; font-weight: 600; }
+  .crs { color: #bbb; }
+
+  /* Sub-section label */
+  .sub-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #888; margin: 1.5rem 0 0.6rem; }
+
+  /* Price note */
+  .pn { font-size: 11px; color: #888; display: block; margin-top: 2px; }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .tabs { display: none; }
+    .section { display: block !important; page-break-inside: avoid; margin-bottom: 2rem; }
+    .section::before { content: attr(data-title); display: block; font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem; padding-bottom: 6px; border-bottom: 2px solid #1a1a1a; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+    .page { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>AI Licensing Comparison: Claude &bull; Claude Code &bull; Cursor</h1>
+    <p>Prepared for IT Procurement — University Deployment Evaluation</p>
+    <div class="meta">
+      <span>Generated April 2026</span>
+      <span>Sources: claude.com/pricing &bull; cursor.com/pricing &bull; support.claude.com</span>
+      <span>Prices subject to change — verify before procurement</span>
+    </div>
+  </div>
+
+  <!-- Summary of Key Findings -->
+  <div class="summary">
+    <h2>Key Findings for IT Procurement</h2>
+    <div class="findings">
+      <div class="finding">
+        <h3>Top recommendation for campus-wide deployment</h3>
+        <p>Claude's <strong>Education Plan</strong> is the only product with an explicit university-wide offering covering students, faculty, and staff at institutional rates. Contact Anthropic sales directly — this plan is not available through individual signups.</p>
+      </div>
+      <div class="finding blue">
+        <h3>Compliance strength: Claude wins clearly</h3>
+        <p>Claude Enterprise offers the deepest compliance stack: SOC 2 Type II, ISO 27001, HIPAA-ready with BAA, Zero Data Retention (ZDR), SCIM, GDPR DPA, and IP allowlisting. Cursor offers SOC 2 and SSO but lacks HIPAA and ZDR. None offer explicit FERPA certification.</p>
+      </div>
+      <div class="finding amber">
+        <h3>FERPA: negotiate directly</h3>
+        <p>No vendor offers FERPA certification as a checkbox. Universities must negotiate a Data Processing Agreement (DPA) with each vendor and contractually exclude student data from model training. Claude's ZDR addendum is the strongest tool available for this.</p>
+      </div>
+      <div class="finding purple">
+        <h3>Claude Code is not separate</h3>
+        <p>Claude Code is included in Claude Pro and above — not a standalone purchase. For a development team, Team Premium seats ($100/seat/mo annual) add Claude Code. Non-developer staff can use cheaper Standard seats ($25/seat/mo annual) in the same plan.</p>
+      </div>
+      <div class="finding">
+        <h3>Cursor: best for developer-only teams</h3>
+        <p>Cursor Teams ($40/user/mo) is compelling for CS/IT engineering departments needing a dedicated AI code editor with SSO and admin controls. It is not appropriate for institution-wide deployment due to limited compliance certifications.</p>
+      </div>
+      <div class="finding red">
+        <h3>Cost predictability: watch Cursor credits</h3>
+        <p>Cursor switched to a credit-based model in mid-2025. Costs are variable — developers using premium models like Claude Sonnet manually can exhaust their monthly credit pool quickly. Cursor's Auto mode is unlimited but uses lower-cost models. Budget accordingly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="show('claude', this)">Claude (claude.ai)</button>
+    <button class="tab" onclick="show('claudecode', this)">Claude Code</button>
+    <button class="tab" onclick="show('cursor', this)">Cursor</button>
+    <button class="tab" onclick="show('compliance', this)">Compliance &amp; Security</button>
+    <button class="tab" onclick="show('edu', this)">University / Education</button>
+  </div>
+
+  <!-- CLAUDE -->
+  <div id="claude" class="section active" data-title="Claude (claude.ai)">
+    <div class="sec-head">
+      <h2>Claude — claude.ai</h2>
+      <p>AI assistant for chat, research, coding, and writing &bull; Source: <a href="https://claude.com/pricing" target="_blank">claude.com/pricing</a></p>
+    </div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Plan</th><th>Price</th><th>Usage / limits</th><th>Reset window</th><th>Models</th><th>Key features</th><th>Min seats</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-gray">Free</span></td>
+            <td>$0</td>
+            <td>~30–100 msgs/day; varies by task complexity</td>
+            <td>Daily</td>
+            <td>Sonnet 4.6</td>
+            <td>Web, iOS, Android, desktop; web search; memory; file creation; basic connectors</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Pro</span></td>
+            <td>$20/mo<span class="pn">$17/mo annual ($200/yr)</span></td>
+            <td>~5× Free; ~50–100 msgs per 5-hr window</td>
+            <td>5-hour rolling</td>
+            <td>Sonnet 4.6, Opus 4.6, Haiku 4.5</td>
+            <td>Claude Code included; Cowork; unlimited Projects; Research; Google Workspace; MCP connectors; Excel &amp; PowerPoint (beta)</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-purple">Max 5×</span></td>
+            <td>$100/mo</td>
+            <td>~25× Free; ~225+ msgs per 5-hr window</td>
+            <td>5-hour rolling</td>
+            <td>All models incl. Opus 4.6</td>
+            <td>Everything in Pro + priority access; early feature access; higher output limits; can share Guest Passes (7-day Pro trials)</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-purple">Max 20×</span></td>
+            <td>$200/mo</td>
+            <td>~100× Free; ~900+ msgs per 5-hr window</td>
+            <td>5-hour rolling</td>
+            <td>All models</td>
+            <td>Everything in Max 5× + maximum priority; top-tier Claude Code usage</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">Team Standard</span></td>
+            <td>$30/seat/mo<span class="pn">$25/seat annual ($300/seat/yr)</span></td>
+            <td>More than Pro; 200K context window</td>
+            <td>5-hour rolling</td>
+            <td>All models</td>
+            <td>Central billing; admin console; SSO; domain capture; project sharing &amp; collaboration; Slack + M365 integrations; enterprise search; no model training on content by default</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">Team Premium</span></td>
+            <td>$150/seat/mo<span class="pn">$100/seat annual</span></td>
+            <td>5× more than Standard; 200K context window</td>
+            <td>5-hour rolling</td>
+            <td>All models</td>
+            <td>Everything in Standard + Claude Code + Cowork; can mix-and-match with Standard seats in same plan</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">Enterprise (self-serve)</span></td>
+            <td>Custom / contact sales<span class="pn">Annual only; min 20 seats</span></td>
+            <td>Increased usage; 500K context window</td>
+            <td>Custom</td>
+            <td>All models</td>
+            <td>Everything in Team + SCIM; audit logs; Compliance API; custom data retention; role-based permissions; GitHub integration; HIPAA-ready; BAA; GDPR DPA; IP allowlisting</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">Enterprise (sales-assisted)</span></td>
+            <td>Custom negotiated<span class="pn">Annual; min 50 seats</span></td>
+            <td>Custom usage commitments</td>
+            <td>Custom</td>
+            <td>All models</td>
+            <td>Everything above + tailored MSA; PO/invoice billing; product bundling; dedicated support; BYOK encryption (H1 2026)</td>
+            <td>50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Prices exclude applicable taxes. Usage limits are approximate and vary by conversation length and model. The 5-hour window resets on a rolling basis. "No model training" applies to Enterprise and API by default; Pro/Team users can opt out in settings.</div>
+  </div>
+
+  <!-- CLAUDE CODE -->
+  <div id="claudecode" class="section" data-title="Claude Code">
+    <div class="sec-head">
+      <h2>Claude Code</h2>
+      <p>AI coding agent (terminal, web, desktop) — not a standalone subscription; billed through Claude plans or API &bull; <a href="https://claude.com/product/claude-code" target="_blank">claude.com/product/claude-code</a></p>
+    </div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Plan</th><th>Price</th><th>Usage / token limits</th><th>Models</th><th>Key features</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-blue">Pro</span></td>
+            <td>$20/mo ($17 annual)<span class="pn">Included in Claude Pro</span></td>
+            <td>Shared with Claude Pro budget; ~5× Free baseline</td>
+            <td>Sonnet 4.6, Opus 4.6</td>
+            <td>Terminal, web, desktop; focused coding sessions; agentic tasks</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-purple">Max 5× / 20×</span></td>
+            <td>$100–$200/mo<span class="pn">Included in Max plans</span></td>
+            <td>25×–100× Free; higher output limits; best for heavy agent use</td>
+            <td>All models</td>
+            <td>Agent Teams (parallel agents); Adaptive Thinking; extended agentic sessions; 1M token context; 128K output</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">Team Premium seat</span></td>
+            <td>$100/seat/mo annual<span class="pn">Mix with Standard seats; min 5 total</span></td>
+            <td>5× Standard; 200K context window</td>
+            <td>All models</td>
+            <td>Claude Code + Cowork for developers; non-devs can use Standard seats ($25/seat) in same plan</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">Enterprise</span></td>
+            <td>Custom<span class="pn">Min 20 seats self-serve; 50 sales-assisted</span></td>
+            <td>Custom usage; 500K context window</td>
+            <td>All models</td>
+            <td>Central permission mgmt; audit logs; SSO; org-level usage policies; GitHub integration; HIPAA-ready</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-gray">API (pay-as-you-go)</span></td>
+            <td>Per token; no monthly minimum</td>
+            <td>No fixed limit; billed at model rates</td>
+            <td>Any model</td>
+            <td>Haiku 4.5: $1/$5 per MTok in/out &bull; Sonnet 4.6: $3/$15 per MTok &bull; Opus 4.6: $5/$25 per MTok &bull; 50% off with Batch API (non-urgent) &bull; Inputs &gt;200K tokens double the input rate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Claude Code draws from the same token budget as the overall Claude subscription — there is no separate Claude Code-only tier. Overage beyond plan limits can be purchased at API rates. The 200K context window applies to Team plans; Enterprise extends to 500K.</div>
+  </div>
+
+  <!-- CURSOR -->
+  <div id="cursor" class="section" data-title="Cursor">
+    <div class="sec-head">
+      <h2>Cursor</h2>
+      <p>AI-native code editor (VS Code fork) — credit-based billing since June 2025; each plan includes a monthly credit pool equal to the plan price &bull; <a href="https://cursor.com/pricing" target="_blank">cursor.com/pricing</a></p>
+    </div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Plan</th><th>Price</th><th>Credits / usage</th><th>Model access</th><th>Key features</th><th>Min seats</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-gray">Hobby</span></td>
+            <td>$0</td>
+            <td>2,000 code completions; limited agent requests; 50 slow requests</td>
+            <td>Limited models</td>
+            <td>Basic AI completions; no credit card required; good for evaluation</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Pro</span></td>
+            <td>$20/mo<span class="pn">$16/mo annual (20% off)</span></td>
+            <td>$20/mo credit pool; unlimited Tab completions; unlimited Auto mode</td>
+            <td>All frontier models (Claude Sonnet, GPT-4, Gemini, etc.); Auto mode free</td>
+            <td>Agent mode; multi-file editing; MCP integrations; cloud agents; pay-as-you-go overages at API rates (can be disabled)</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Pro+</span></td>
+            <td>$60/mo<span class="pn">$48/mo annual</span></td>
+            <td>$60/mo credit pool (3× Pro)</td>
+            <td>All models</td>
+            <td>Same as Pro; for users who regularly exhaust Pro credits</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-purple">Ultra</span></td>
+            <td>$200/mo<span class="pn">$160/mo annual</span></td>
+            <td>$200/mo credit pool (20× Pro); priority feature access</td>
+            <td>All models; maximum priority</td>
+            <td>Highest capacity; for power users running agents all day on large codebases</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">Teams</span></td>
+            <td>$40/user/mo<span class="pn">$32/user annual</span></td>
+            <td>$20 credit pool per user/mo; overages at API rates</td>
+            <td>All frontier models</td>
+            <td>Shared chats/commands/rules; centralized billing; usage analytics; privacy mode controls; RBAC; SAML/OIDC SSO; SOC 2</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">Enterprise</span></td>
+            <td>Custom — contact sales<span class="pn">Volume discounts at 100+ seats</span></td>
+            <td>Pooled usage across org (not per-user limits)</td>
+            <td>All models</td>
+            <td>Everything in Teams + pooled org credits; invoice/PO billing; SCIM seat mgmt; AI code tracking APIs; audit logs; dedicated support; SOC 2</td>
+            <td>Custom</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>Credit system explained:</strong> Auto mode is unlimited — Cursor selects cost-efficient models automatically. Manually selecting frontier models (Claude Sonnet, GPT-4) draws from your credit pool. When credits are exhausted, enable pay-as-you-go overages or switch to Auto. Annual billing saves ~20%. Cursor also supports BYOK (Bring Your Own API Key) for OpenAI or Anthropic, bypassing the credit system entirely.</div>
+  </div>
+
+  <!-- COMPLIANCE -->
+  <div id="compliance" class="section" data-title="Compliance and Security">
+    <div class="sec-head">
+      <h2>Compliance &amp; Security Comparison</h2>
+      <p>Enterprise-tier features for IT and security review</p>
+    </div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>Feature</th><th>Claude Enterprise</th><th>Claude Code (Enterprise)</th><th>Cursor Teams / Enterprise</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>SSO</td><td><span class="chk">✓</span> SAML 2.0, OIDC (Okta, Azure AD, Google)</td><td><span class="chk">✓</span> Same as Claude Enterprise</td><td><span class="chk">✓</span> SAML/OIDC (Teams and above)</td></tr>
+          <tr><td>SCIM provisioning</td><td><span class="chk">✓</span> Auto sync with IdP; recommended for 20+ users</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Enterprise only</td></tr>
+          <tr><td>Audit logs</td><td><span class="chk">✓</span> Immutable; via Compliance API</td><td><span class="chk">✓</span> Centralized; org-level policies</td><td><span class="chk">✓</span> Enterprise only; AI code tracking APIs</td></tr>
+          <tr><td>SOC 2 Type II</td><td><span class="chk">✓</span> Full report under NDA via Trust Portal</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Teams and Enterprise</td></tr>
+          <tr><td>ISO 27001</td><td><span class="chk">✓</span> ISO 27001:2022 + ISO/IEC 42001:2023 (AI)</td><td><span class="chk">✓</span></td><td><span class="crs">—</span> Not publicly confirmed</td></tr>
+          <tr><td>HIPAA</td><td><span class="chk">✓</span> HIPAA-ready config; BAA available</td><td><span class="chk">✓</span> Requires ZDR addendum</td><td><span class="crs">—</span> Not offered</td></tr>
+          <tr><td>FERPA</td><td><span class="crs">—</span> Not certified; negotiate DPA for student data</td><td><span class="crs">—</span></td><td><span class="crs">—</span></td></tr>
+          <tr><td>Zero data retention (ZDR)</td><td><span class="chk">✓</span> Addendum available; no data written to disk</td><td><span class="chk">✓</span> Required for PHI</td><td><span class="crs">—</span></td></tr>
+          <tr><td>Model training on data</td><td><span class="chk">✓</span> Off by default (Enterprise &amp; API)</td><td><span class="chk">✓</span> Off by default</td><td><span class="chk">✓</span> Privacy mode (Teams+)</td></tr>
+          <tr><td>Data residency / private network</td><td><span class="chk">✓</span> AWS Bedrock or Google Vertex AI (VPC)</td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td></tr>
+          <tr><td>Custom data retention</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td></tr>
+          <tr><td>GDPR / DPA</td><td><span class="chk">✓</span> Data Processing Addendum available</td><td><span class="chk">✓</span></td><td><span class="crs">—</span> Not publicly confirmed</td></tr>
+          <tr><td>BYOK encryption</td><td><span class="chk">✓</span> Coming H1 2026</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> BYOK for OpenAI/Anthropic keys</td></tr>
+          <tr><td>IP allowlisting</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="crs">—</span></td></tr>
+          <tr><td>Role-based access control</td><td><span class="chk">✓</span> Primary owner, owner, member roles</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Teams and above</td></tr>
+          <tr><td>Invoice / PO billing</td><td><span class="chk">✓</span> Sales-assisted Enterprise</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span> Enterprise only</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><strong>FERPA note:</strong> None of these vendors offer FERPA certification as a checkbox. Universities must negotiate a Data Processing Agreement and contractually exclude student data. Claude's ZDR addendum + BAA is the strongest available framework for regulated data. For maximum isolation, deploy Claude via AWS Bedrock or Google Vertex AI, which routes all traffic within your VPC.</div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div id="edu" class="section" data-title="University and Education">
+    <div class="sec-head">
+      <h2>University &amp; Education Pathways</h2>
+      <p>Options specific to higher education institutions — <a href="https://claude.com/solutions/education" target="_blank">claude.com/solutions/education</a></p>
+    </div>
+
+    <p class="sub-label">Claude — Education plan</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Option</th><th>Who it's for</th><th>What you get</th><th>How to access</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-green">Claude for Education</span></td>
+            <td>Universities — students, faculty, and staff institution-wide</td>
+            <td>Campus-wide plan at institutional rates; 500K context window; advanced models; increased usage; Projects; file uploads; dedicated API credits; academic research features; training resources; Anthropic support. Known partners include Northeastern University, LSE, Champlain College, University of San Francisco, and Northumbria University.</td>
+            <td>Contact Anthropic education sales at <a href="https://claude.com/solutions/education" target="_blank">claude.com/solutions/education</a>. Pricing is negotiated — not available via individual signup.</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-green">Research API credits</span></td>
+            <td>Graduate/postdoc researchers at accredited universities</td>
+            <td>API credits for AI-related research projects via Anthropic grant programs ("Claude for Good")</td>
+            <td>Apply through Anthropic's research grant program; limited availability</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-gray">Individual Pro</span></td>
+            <td>Faculty or staff paying individually</td>
+            <td>Standard Pro features; no academic discount for individuals as of April 2026</td>
+            <td>$20/mo or $17/mo annual — no .edu discount available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="sub-label">Cursor — Education</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Option</th><th>Who it's for</th><th>What you get</th><th>How to access</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-green">Student plan</span></td>
+            <td>Enrolled students</td>
+            <td>Free access (Hobby-equivalent); limited completions and agent requests</td>
+            <td>Apply with .edu email or enrollment proof at cursor.com</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-teal">Teams</span></td>
+            <td>CS/engineering departments</td>
+            <td>$40/user/mo; SSO; centralized billing; admin controls; SOC 2</td>
+            <td>Standard Teams signup; no published academic discount</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Recommended IT action steps:</strong><br>
+      1. Contact Anthropic education sales for the Claude for Education institutional quote — this is your best path for campus-wide deployment at negotiated rates.<br>
+      2. Request Anthropic's SOC 2 report and DPA template through their Trust Portal (<a href="https://trust.anthropic.com" target="_blank">trust.anthropic.com</a>).<br>
+      3. Negotiate ZDR + BAA terms and ask explicitly about FERPA data handling during procurement.<br>
+      4. For developer/IT staff needing a code editor, evaluate Cursor Teams separately — it does not overlap with Claude's general productivity use case.<br>
+      5. All pricing verified April 2026 — confirm current rates before finalizing procurement.
+    </div>
+  </div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
